@@ -12,9 +12,9 @@ def load_animation():
     anicount = 0
     counttime = 0
     i = 0
-    while (counttime != 1):
+    while (counttime != 100):
         time.sleep(0.35)
-        sys.stdout.write("\r" + drowColor(text, 'orange') + animation[anicount])
+        sys.stdout.write("\r" + animation[anicount])
         sys.stdout.flush()
 
         i = (i + 1) % len(text)
