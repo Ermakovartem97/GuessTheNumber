@@ -1,4 +1,6 @@
 from random import randint
+
+from colorFun import drawColor
 from function import EnterNumber, levelOption
 import os
 
@@ -11,17 +13,23 @@ while endGame:
     # Очистка консоли
     os.system("cls")
 
-    endGame = EnterNumber('Главное меню\n1 - Новая игра \n0 - Выход\n')
+    #Главное меню
+    endGame = EnterNumber(drawColor('Главное меню', 'Menu') + '\n1 - Новая игра \n0 - Выход\n')
 
     os.system("cls")
 
+    # Выход из приложения (main loop)
     if endGame == 0:
         print('До скорой встречи!')
         break
 
+    # Если выбрана "Новая игра"
     elif endGame == 1:
         # Выбор уровня
-        level = EnterNumber('Выберите уровень\n1 - Легкий\n2 - Средний\n3 - Сложный\n')
+        level = EnterNumber(drawColor('Выберите уровень', 'menu') +
+                            '\n1 - ' + drawColor('Легкий', 'green') +
+                            '\n2 - ' + drawColor('Средний', 'yellow') +
+                            '\n3 - ' + drawColor('Сложный', 'red') + '\n')
 
         # Начальные значения для выбранного уровня
         option = levelOption(level)
@@ -31,14 +39,21 @@ while endGame:
         # Компьютер загадывает число
         number = randint(minNum, maxNum)
 
+        # Критерий остановки цикала (выйграл ли пользователь)
         win = False
 
         os.system("cls")
 
+        # Сообщение в начале каждого цикла
+        alert = ''
+
+        #Цикл игры
         while not win:
 
             os.system("cls")
             print(number)
+            print(alert, end='')
+            alert = ''
 
             # Функция для ввода и проверки числа.
             userNumber = EnterNumber(f'Угадай число от {minNum} до {maxNum}: ')
@@ -50,4 +65,10 @@ while endGame:
 
                 # Конец игры
                 win = True
+
+            if userNumber > maxNum or userNumber < minNum:
+                alert = drawColor('Мне кажется число немного не попадает в диапазон\n', 'orange')
+
+            if alert == '':
+                alert = f'Нет, это не {userNumber}\n'
 input('Нажмите Enter')
