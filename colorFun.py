@@ -1,30 +1,46 @@
-endColor = '\033[0m'
-colors = {'orange': '\033[38;2;201;100;59m',
-          'white': '\033[38;2;0;0;0m',
-          'black': '\033[38;2;256;256;256m'
-          }
-bgColors = {
-    'orange': '\033[48;2;201;100;59m',
-    'black': '\033[48;2;0;0;0m',
-    'white': '\033[48;2;256;256;256m'
+import os
+
+endColor = '\033[0;0m'
+
+startColor = '\033[38;2;'
+startBgColor = '\033[48;2;'
+colors = {
+    '0': '0m',
+    'menu': '148;121;77m',
+    'green': '177;189;161m',
+    'red': '251;115;97m',
+    'yellow': '242;222;137m',
+    'orange': '201;100;59m',
+    'white': '255;255;255m',
+    'black': '0;0;0m'
 }
 
 styles = {
-    1: '\033[1m',
-    2: '\033[2m',
-    3: '\033[3m',
-    4: '\033[4m',
-    5: '\033[5m',
-    6: '\033[6m',
-    7: '\033[7m',
+    '0': '\033[0m',
+    '1': '\033[1m',
+    '2': '\033[4m',
+    '3': '\033[7m'
 }
 
 
-def drowColor(text, txColor='white', style='0', bgColor='black'):
-    newText = styles[2] + colors[txColor] + bgColors[bgColor] + text + endColor
+def drawColor(text, txColor='0', bgColor='0', style='0'):
+    '''
+
+    Форматирует текст
+
+    :param text: Текст
+    :param txColor: Цвет текста ищется в словаре colors
+    :param bgColor: Цвет фона ищется в словаре colors
+    :param style: Стиль текста ищестя в словаре styles
+    :return: Возвращает отформотированный текст
+    '''
+    os.system('')
+    try:
+        newText = styles[str(style).lower()] + startBgColor + colors[str(bgColor).lower()] + startColor + colors[str(txColor).lower()] + text + endColor
+    except:
+        print('Неверное значение одного или нескольких аргументов')
+        newText = text
+
+
     return newText
 
-
-a = drowColor('Hello', 'orange')
-print(a)
-input()
