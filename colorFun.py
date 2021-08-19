@@ -36,7 +36,7 @@ def drawColor(text, txColor='0', bgColor='0', style='0'):
     '''
     os.system('')
     try:
-        newText = styles[str(style).lower()] + startBgColor + colors[str(bgColor).lower()] + startColor + colors[str(txColor).lower()] + text + endColor
+        newText = styles[str(style).lower()] + startBgColor + colors[str(bgColor).lower()] + startColor + colors[str(txColor).lower()] + str(text) + endColor
     except:
         print('Неверное значение одного или нескольких аргументов')
         newText = text
