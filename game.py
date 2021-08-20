@@ -1,6 +1,6 @@
 from random import randint
 from colorFun import drawColor
-from function import EnterNumber, levelOption, textDeclination, stageFun
+from function import *
 import os
 
 endGame = True
@@ -41,9 +41,11 @@ while endGame:
         alert = ''  # Сообщение в начале каждого цикла
         countTry = 0
         score = 1000
-        preAlert = '' # Сообщение перед вниманием добавляется каждый шаг новое
+        preAlert = ''  # Сообщение перед вниманием добавляется каждый шаг новое
+        timePreAlertAll = '\n\n'
         timePreAlert = ''
         timeOutAlert = 0
+        timeOutAlertAll = 0
 
         # Цикл игры
         while not win:
@@ -80,8 +82,9 @@ while endGame:
 
             # Если игрок не угадал число
             if alert == '':
-                alert += f'Нет, это не {userNumber}\n'
+                alert += f'Нет, это не {userNumber}' + timePreAlertAll
 
+            # Подсказки в зависимости от стадии игры
             if stage == 1:
                 alert += 'Не сдавайтесь у вас все получится!\n'
             elif stage == 2:
@@ -92,5 +95,11 @@ while endGame:
                 alert += 'Я тайно узнал, что загаданное число ' + drawColor(evenNum, 'orange') + '\n'
                 timeOutAlert = 1
                 timePreAlert += 'Загаданное число ' + drawColor(evenNum, 'orange') + '\n'
+            elif stage >= 3:
+                diff = coldHot(number, userNumber)
+                alert += 'Ну, что мне сказать ' + diff + '\n'
+                timeOutAlertAll = 1
+                timePreAlertAll = ' ,но когда ты загадывал ' + drawColor(userNumber,
+                                                                         'orange') + ' было ' + diff + '\n\n'
 
 input('Нажмите Enter')  # Задержка в консоли

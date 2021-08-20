@@ -65,3 +65,22 @@ def stageFun(countryTry):
         if countryTry in stageArr[i]:
             userStage = i + 1
     return userStage
+
+def coldHot(number, userNumber):
+    diff = abs(number - userNumber)
+    if diff < 2:
+        ans = 'Все вокруг плавится'
+    elif diff < 5:
+        ans = 'Горяченно'
+    elif diff < 10:
+        ans = 'Впринципе тепло'
+    elif diff < 15:
+        ans = 'Комнатная температура'
+    elif diff < 20:
+        ans = 'Прохладненько'
+    elif diff < 25:
+        ans = 'Дайте мне шапку и горячий какао'
+    else:
+        ans = 'Ледяной ветер'
+
+    return ans
